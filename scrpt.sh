@@ -2,9 +2,9 @@
 
 sudo apt update
 
-sudo apt install apache2
-sudo apt install mariadb-server mariadb-client
-sudo apt install php php-mysql libapache2-mod-php php-cli php-cgi php-gd
+sudo apt install apache2 -y
+sudo apt install mariadb-server mariadb-client -y
+sudo apt install php php-mysql libapache2-mod-php php-cli php-cgi php-gd -y
 
 sudo mysql -u root -e "CREATE DATABASE wp6_database;"
 sudo mysql -u root -e "CREATE USER 'wp6_user'@'localhost' IDENTIFIED BY '123456';"
@@ -13,7 +13,7 @@ sudo mysql -u root -e "FLUSH PRIVILEGES;"
 sudo mysql -u root -e "exit "
 
 sudo wget https://ru.wordpress.org/latest-ru_RU.zip
-sudo unzip latest-ru_RU.zip /var/www/
+sudo unzip latest-ru_RU.zip -d /var/www/
 sudo mv /var/www/wordpress/ /var/www/mysite.by/
 
 sudo cp $PWD/mysiteby.conf /etc/apache2/sites-available/
