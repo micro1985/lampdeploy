@@ -18,8 +18,8 @@ define(`AppConnInfo',`dnl
 	# modules, e.g.
 	#LogLevel info ssl:warn
 
-	ErrorLog ${APACHE_LOG_DIR}/$1.log
-	CustomLog ${APACHE_LOG_DIR}/$1'_access'.log combined
+	ErrorLog ${APACHE_LOG_DIR}/$1_error.log
+	CustomLog ${APACHE_LOG_DIR}/$1_access.log combined
 
 	# For most configuration files from conf-available/, which are
 	# enabled or disabled at a global level, it is possible to
@@ -30,4 +30,4 @@ define(`AppConnInfo',`dnl
 </VirtualHost>
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
-')dnl
+)dnl
