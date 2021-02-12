@@ -23,7 +23,7 @@ sudo wget https://ru.wordpress.org/latest-ru_RU.zip
 sudo unzip latest-ru_RU.zip -d /var/www/
 sudo mv /var/www/wordpress/ /var/www/$SITENAME/
 
-sudo cp $PWD/$SITENAME.conf /etc/apache2/sites-vailable/
+sudo cp $PWD/$SITENAME.conf /etc/apache2/sites-available/
 sudo chown -R www-data:www-data /var/www/$SITENAME/
 sudo a2ensite $SITENAME.conf
 sudo service apache2 restart
