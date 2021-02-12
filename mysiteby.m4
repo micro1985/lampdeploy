@@ -1,3 +1,4 @@
+define(`AppConnInfo',`dnl
 <VirtualHost *:80>
 	# The ServerName directive sets the request scheme, hostname and port that
 	# the server uses to identify itself. This is used when creating
@@ -6,10 +7,10 @@
 	# match this virtual host. For the default virtual host (this file) this
 	# value is not decisive as it is used as a last resort host regardless.
 	# However, you must set it for any further virtual host explicitly.
-	ServerName mysite.by
+	ServerName $1
 
 	ServerAdmin webmaster@localhost
-	DocumentRoot /var/www/mysite.by
+	DocumentRoot /var/www/$1
 
 	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
 	# error, crit, alert, emerg.
@@ -17,8 +18,8 @@
 	# modules, e.g.
 	#LogLevel info ssl:warn
 
-	ErrorLog ${APACHE_LOG_DIR}/mysiteby_error.log
-	CustomLog ${APACHE_LOG_DIR}//mysiteby_access.log combined
+	ErrorLog ${APACHE_LOG_DIR}/$1.log
+	CustomLog ${APACHE_LOG_DIR}/$1'_access'.log combined
 
 	# For most configuration files from conf-available/, which are
 	# enabled or disabled at a global level, it is possible to
@@ -29,3 +30,4 @@
 </VirtualHost>
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+')dnl
