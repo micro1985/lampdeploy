@@ -20,15 +20,6 @@ acclog=$SITENAME"_access"
 sudo echo -e "	CustomLog \${APACHE_LOG_DIR}/$acclog.log combined\n" >> /etc/apache2/sites-available/$SITENAME.conf
 sudo echo -e "</VirtualHost>" >> /etc/apache2/sites-available/$SITENAME.conf
 
-sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/$SITENAME.conf
-
-sudo sed -i "s/\#ServerName www.example.com/ServerName $SITENAME/g" /etc/apache2/sites-available/$SITENAME.conf
-sudo sed -i "s/html/$SITENAME/g" /etc/apache2/sites-available/$SITENAME.conf
-errlog=$SITENAME"_error"
-sudo sed -i "s/error/$errlog/g" /etc/apache2/sites-available/$SITENAME.conf
-acclog=$SITENAME"_access"
-sudo sed -i "s/access/$acclog/g" /etc/apache2/sites-available/$SITENAME.conf
-
 sudo mysql_secure_installation
 
 sudo mysql -u root -e "CREATE DATABASE wp_database;"
