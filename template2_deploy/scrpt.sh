@@ -14,7 +14,6 @@ sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-availab
 sudo sed -i "s/\#ServerName www.example.com/ServerName $SITENAME/g" /etc/apache2/sites-available/$SITENAME.conf
 sudo sed -i "s/html/$SITENAME/g" /etc/apache2/sites-available/$SITENAME.conf
 errlog=$SITENAME"_error"
-echo $errlog
 sudo sed -i "s/error/$errlog/g" /etc/apache2/sites-available/$SITENAME.conf
 acclog=$SITENAME"_access"
 sudo sed -i "s/access/$acclog/g" /etc/apache2/sites-available/$SITENAME.conf
@@ -30,7 +29,6 @@ sudo wget https://ru.wordpress.org/latest-ru_RU.zip
 sudo unzip latest-ru_RU.zip -d /var/www/
 sudo mv /var/www/wordpress/ /var/www/$SITENAME/
 
-sudo cp $PWD/$SITENAME.conf /etc/apache2/sites-available/
 sudo chown -R www-data:www-data /var/www/$SITENAME/
 sudo a2ensite $SITENAME.conf
 sudo service apache2 restart
