@@ -10,15 +10,15 @@ echo "Enter sitename:"
 read SITENAME
 
 sudo touch /etc/apache2/sites-available/$SITENAME.conf
-sudo echo -e "<VirtualHost *:80>\n" >> /etc/apache2/sites-available/$SITENAME.conf
-sudo echo -e "	ServerName $SITENAME\n" >> /etc/apache2/sites-available/$SITENAME.conf
-sudo echo -e "	ServerAdmin webmaster@host" >> /etc/apache2/sites-available/$SITENAME.conf
-sudo echo -e "	DocumentRoot /var/www/$SITENAME\n" >> /etc/apache2/sites-available/$SITENAME.conf
+echo "<VirtualHost *:80>" | sudo tee /etc/apache2/sites-available/$SITENAME.conf
+echo "	ServerName $SITENAME" | sudo tee -a /etc/apache2/sites-available/$SITENAME.conf
+echo "	ServerAdmin webmaster@host" | sudo tee -a /etc/apache2/sites-available/$SITENAME.conf
+echo "	DocumentRoot /var/www/$SITENAME" | sudo tee -a /etc/apache2/sites-available/$SITENAME.conf
 errlog=$SITENAME"_error"
-sudo echo -e "	ErrorLog \${APACHE_LOG_DIR}/$errlog.log" >> /etc/apache2/sites-available/$SITENAME.conf
+echo "	ErrorLog \${APACHE_LOG_DIR}/$errlog.log" | sudo tee -a /etc/apache2/sites-available/$SITENAME.conf
 acclog=$SITENAME"_access"
-sudo echo -e "	CustomLog \${APACHE_LOG_DIR}/$acclog.log combined\n" >> /etc/apache2/sites-available/$SITENAME.conf
-sudo echo -e "</VirtualHost>" >> /etc/apache2/sites-available/$SITENAME.conf
+echo "	CustomLog \${APACHE_LOG_DIR}/$acclog.log combined" | sudo tee -a /etc/apache2/sites-available/$SITENAME.conf
+echo "</VirtualHost>" | sudo tee -a /etc/apache2/sites-available/$SITENAME.conf
 
 sudo mysql_secure_installation
 
