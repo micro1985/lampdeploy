@@ -1,6 +1,7 @@
 #!/bin/bash
 
-f_install_apache_php_centos7(){
+f_install_apache_php_centos7()
+{
 sudo yum update -y
 
 sudo yum install httpd zip -y
@@ -14,7 +15,8 @@ sudo yum update -y
 sudo yum -y install php php-fpm php-gd php-mysql
 }
 
-f_create_conf_file() {
+f_create_conf_file()
+{
 	sudo touch ./$SITENAME.conf
 	echo "<VirtualHost *:80>" | sudo tee ./$SITENAME.conf
 	echo "	ServerName $SITENAME" | sudo tee -a ./$SITENAME.conf
@@ -26,13 +28,15 @@ f_create_conf_file() {
 }
 
 
-f_install_DB_centos7() {
+f_install_DB_centos7()
+{
 	sudo yum install mariadb-server -y
 	sudo systemctl start mariadb
 	sudo systemctl enable mariadb
 }
 
-f_create_DB() {
+f_create_DB()
+{
 cat << EOF | sudo mysql_secure_installation
 
 n
@@ -48,7 +52,8 @@ sudo mysql -u root -e "GRANT ALL PRIVILEGES ON wp_database.* TO 'wp_user'@'local
 sudo mysql -u root -e "FLUSH PRIVILEGES;"
 }
 
-f_install_wordpress() {
+f_install_wordpress()
+{
 sudo wget https://ru.wordpress.org/latest-ru_RU.zip
 sudo unzip latest-ru_RU.zip -d /var/www/
 sudo mv /var/www/wordpress/ /var/www/$SITENAME/
@@ -59,8 +64,6 @@ sudo touch /var/www/$SITENAME/log/errors.log
 sudo chown -R apache:apache /var/www/$SITENAME/
 sudo service httpd restart
 }
-
-
 
 echo "Enter sitename:"
 read SITENAME
@@ -75,3 +78,5 @@ f_create_conf_file
 sudo cp ./$SITENAME.conf /etc/httpd/conf.d/
 
 f_install_wordpress
+
+sudo rm *.conf *.zip
