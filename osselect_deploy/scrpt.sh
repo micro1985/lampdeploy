@@ -51,3 +51,4 @@ sudo mv /var/www/wordpress/ /var/www/$SITENAME/
 
 sudo chown -R apache:apache /var/www/$SITENAME/
 sudo service httpd restart
+
