@@ -46,8 +46,8 @@ sudo wget https://ru.wordpress.org/latest-ru_RU.zip
 sudo unzip latest-ru_RU.zip -d /var/www/
 sudo mv /var/www/wordpress/ /var/www/$SITENAME/
 
-#sudo mkdir /var/www/$SITENAME/log
-#sudo touch /var/www/$SITENAME/log/errors.log
+sudo mkdir /var/www/$SITENAME/log
+sudo touch /var/www/$SITENAME/log/errors.log
 
 sudo chown -R apache:apache /var/www/$SITENAME/
 sudo service httpd restart
