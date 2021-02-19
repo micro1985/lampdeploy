@@ -7,4 +7,8 @@ do
         echo "${RELEASE}" | grep -i -q "${name}" && osname=`echo "$name"`
 done
 
-echo "${osname}"
+if [ "$osname" == "DEBIAN" ]; then
+	echo "${osname}"
+elif [ "$osname" == "CENTOS" ]; then
+	echo "${osname}"
+fi
