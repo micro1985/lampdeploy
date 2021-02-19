@@ -12,10 +12,13 @@ sudo systemctl enable mariadb
 
 #sudo yum install php php-pear php-gd php-mysql -y
 
+sudo rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 sudo yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 sudo yum-config-manager -y --enable remi-php72
 sudo yum update
-sudo yum install -y php73 php73-php-fpm php73-php-mysqlnd php73-php-opcache php73-php-xml php73-php-xmlrpc php73-php-gd php73-php-mbstring php73-php-json
+sudo yum install php php-fpm php-gd php-mysql
+
+#sudo yum install -y php74 php74-php-fpm php74-php-mysqlnd php74-php-opcache php74-php-xml php74-php-xmlrpc php74-php-gd php74-php-mbstring php74-php-json
 
 echo "Enter sitename:"
 read SITENAME
