@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#-----------------------------------------------------------------------------------------------------------
+###Many functions for different OSes
+#-----------------------------------------------------------------------------------------------------------
+
 f_install_apache_php_centos7()
 {
 	sudo yum update -y
@@ -77,21 +81,57 @@ f_install_wordpress()
 echo "Enter sitename:"
 read SITENAME
 
-f_install_apache_php_centos7
 
-f_install_DB_centos7
-f_create_DB
+#-----------------------------------------------------------------------------------------------------------
+###Selecting OS
+#-----------------------------------------------------------------------------------------------------------
 
-f_create_conf_file
+RELEASE=`cat /etc/*-release`
 
-sudo cp ./$SITENAME.conf /etc/httpd/conf.d/
+osname=""
 
-f_install_wordpress
+for name in 'CENTOS' 'UBUNTU' 'OpenSuse' 'DEBIAN' 'RED HAT'
+do
+        echo "${RELEASE}" | grep -i -q "${name}" && osname=`echo "$name"`
+done
 
-sudo mkdir /var/www/$SITENAME/log
-sudo touch /var/www/$SITENAME/log/errors.log
+if [ "$osname" == "DEBIAN" ]; then
+	echo "${osname}"
 
-sudo chown -R apache:apache /var/www/$SITENAME/
-sudo service httpd restart
+	f_install_apache_php_debian
+
+	f_install_DB_debian
+	f_create_DB
+
+	f_create_conf_file
+
+	sudo cp ./$SITENAME.conf /etc/apache2/sites-available/
+
+	f_install_wordpress
+
+	sudo chown -R www-data:www-data /var/www/$SITENAME/
+	sudo a2ensite $SITENAME.conf
+	sudo service apache2 restart
+
+elif [ "$osname" == "CENTOS" ]; then
+	echo "${osname}"
+	
+	f_install_apache_php_centos7
+
+	f_install_DB_centos7
+	f_create_DB
+
+	f_create_conf_file
+
+	sudo cp ./$SITENAME.conf /etc/httpd/conf.d/
+
+	f_install_wordpress
+
+	sudo mkdir /var/www/$SITENAME/log
+	sudo touch /var/www/$SITENAME/log/errors.log
+
+	sudo chown -R apache:apache /var/www/$SITENAME/
+	sudo service httpd restart
+fi
 
 sudo rm *.conf *.zip
