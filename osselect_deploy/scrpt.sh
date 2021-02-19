@@ -118,7 +118,7 @@ if [ "$osname" == "DEBIAN" ]; then
 
 elif [ "$osname" == "CENTOS" ]; then
 	echo "${osname}"
-	
+
 	f_install_apache_php_centos7
 
 	f_install_DB_centos7
